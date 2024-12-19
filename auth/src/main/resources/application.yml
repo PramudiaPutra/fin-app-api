@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: auth
+
+  config:
+    import: file:${user.home}/fin_api/application-config.yml
+
+  datasource:
+    platform: ${DB_PLATFORM}
+    driver-class-name: ${DB_DRIVER}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    expiration-time: ${JWT_EXP_TIME}
