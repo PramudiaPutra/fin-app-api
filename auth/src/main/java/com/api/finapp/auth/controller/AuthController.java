@@ -5,7 +5,7 @@ import com.api.finapp.auth.payload.request.LoginRequest;
 import com.api.finapp.auth.payload.request.RegisterRequest;
 import com.api.finapp.auth.payload.response.LoginResponse;
 import com.api.finapp.auth.payload.response.RegisterResponse;
-import com.api.finapp.auth.service.AuthenticationService;
+import com.api.finapp.auth.service.AuthService;
 import com.api.finapp.auth.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +18,17 @@ import java.util.Date;
 
 @RequestMapping("/auth")
 @RestController
-public class AuthenticationController {
+public class AuthController {
 
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private AuthenticationService authenticationService;
+    private AuthService authService;
 
     @PostMapping("/signup")
     public ResponseEntity<RegisterResponse> signup(@RequestBody RegisterRequest request) {
-        User user = authenticationService.signUp(request);
+        User user = authService.signUp(request);
 
         RegisterResponse response = new RegisterResponse();
         response.setEmail(user.getEmail());
@@ -42,7 +42,7 @@ public class AuthenticationController {
 
     @PostMapping("login")
     public ResponseEntity<LoginResponse> signIn(@RequestBody LoginRequest request) {
-        User user = authenticationService.login(request);
+        User user = authService.login(request);
         String jwtToken = jwtService.generateToken(user);
         Date jwtExpiration = jwtService.getExpiration(jwtToken);
 
