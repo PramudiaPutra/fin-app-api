@@ -3,7 +3,7 @@ spring:
     name: auth
 
   config:
-    import: file:${user.home}/fin_api/application-config.yml
+    import: optional:file:/application-config.yml, optional:file:${user.home}/fin_api/application-config.yml,
 
   datasource:
     platform: ${DB_PLATFORM}
